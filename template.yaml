@@ -8,7 +8,11 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 30
+    Runtime: python3.8
+    Environment:
+      Variables:
+        BINGSU_VOUCHER_TABLE_NAME: !Ref VoucherTable
 
 Resources:
   AddVoucherFunction:
@@ -16,7 +20,6 @@ Resources:
     Properties:
       CodeUri: bingsuVoucher/
       Handler: app.lambda_handler
-      Runtime: python3.8
 
             
   VoucherTable:
@@ -32,9 +35,9 @@ Resources:
       TableName: "BingsuVoucher"
 
 Outputs:
-  HelloWorldFunction:
+  AddVoucherFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt AddVoucherFunction.Arn
-  HelloWorldFunctionIamRole:
+  AddVoucherFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt AddVoucherFunctionRole.Arn
