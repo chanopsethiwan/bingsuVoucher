@@ -3,6 +3,19 @@ from pynamodb.attributes import UnicodeAttribute, NumberAttribute, UTCDateTimeAt
 from pynamodb.indexes import GlobalSecondaryIndex, AllProjection
 import os
 
+class StatusIndex(GlobalSecondaryIndex):
+    """
+    This class represents a global secondary index
+    """
+    class Meta:
+        index_name = 'status'
+        read_capacity_units = 1
+        write_capacity_units = 1
+        # All attributes are projected
+        projection = AllProjection()
+
+    status = UnicodeAttribute(hash_key=True)
+
 class PynamoBingsuVoucher(Model):
     ''' database to store voucher '''
     class Meta:
@@ -12,3 +25,5 @@ class PynamoBingsuVoucher(Model):
     voucher_type = UnicodeAttribute()
     date = UTCDateTimeAttribute()
     status = UnicodeAttribute()
+    
+    status_index = StatusIndex()

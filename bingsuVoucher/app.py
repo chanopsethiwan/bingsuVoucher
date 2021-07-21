@@ -1,1 +1,1 @@
-from src.app import lambda_handler
+from src.app import add_voucher
