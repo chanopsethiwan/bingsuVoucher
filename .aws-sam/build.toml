@@ -6,6 +6,6 @@ codeuri = "/Users/chap/bingsuVoucher/bingsuVoucher"
 runtime = "python3.8"
 source_md5 = ""
 packagetype = "Zip"
-functions = ["AddVoucherFunction"]
+functions = ["AddVoucherFunction", "GetVoucherByIdFunction"]
 
 [layer_build_definitions]

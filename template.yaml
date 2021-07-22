@@ -20,6 +20,12 @@ Resources:
     Properties:
       CodeUri: bingsuVoucher/
       Handler: app.add_voucher
+      
+  GetVoucherByIdFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: bingsuVoucher/
+      Handler: app.get_voucher_by_id
 
             
   VoucherTable:
@@ -41,7 +47,7 @@ Resources:
               KeyType: HASH
           Projection: 
             ProjectionType: ALL
-      TableName: "BingsuVoucher1"
+      TableName: "BingsuVoucher"
 
 Outputs:
   AddVoucherFunction:

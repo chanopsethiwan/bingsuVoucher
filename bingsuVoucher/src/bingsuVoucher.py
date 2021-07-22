@@ -23,7 +23,7 @@ class PynamoBingsuVoucher(Model):
         region = 'ap-southeast-1'
     voucher_id = UnicodeAttribute(hash_key=True)
     voucher_type = UnicodeAttribute()
-    date = UTCDateTimeAttribute()
+    date_time = UnicodeAttribute()
     status = UnicodeAttribute()
     
     status_index = StatusIndex()
