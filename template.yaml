@@ -26,6 +26,12 @@ Resources:
     Properties:
       CodeUri: bingsuVoucher/
       Handler: app.get_voucher_by_id
+      
+  GetAvailableVouchersFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: bingsuVoucher/
+      Handler: app.get_voucher_by_id
 
             
   VoucherTable:

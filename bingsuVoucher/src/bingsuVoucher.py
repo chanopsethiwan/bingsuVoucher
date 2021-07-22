@@ -27,3 +27,6 @@ class PynamoBingsuVoucher(Model):
     status = UnicodeAttribute()
     
     status_index = StatusIndex()
+    
+    def returnJson(self):
+        return vars(self).get('attribute_values')
