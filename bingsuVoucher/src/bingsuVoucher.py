@@ -25,6 +25,8 @@ class PynamoBingsuVoucher(Model):
     voucher_type = UnicodeAttribute()
     date_time = UnicodeAttribute()
     status = UnicodeAttribute()
+    title = UnicodeAttribute()
+    description = UnicodeAttribute()
     
     status_index = StatusIndex()
     

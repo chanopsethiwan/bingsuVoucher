@@ -11,7 +11,9 @@ def add_voucher(event, context):
         voucher_id = item['voucher_id'],
         voucher_type = item['voucher_type'],
         date_time = str(datetime.utcnow()).replace(' ','T')[0:19]+'+00:00',
-        status = item['status']
+        status = item['status'],
+        title = item['title'],
+        description = item['description']
     )
     voucher_item.save()
     return {'status': 200}
