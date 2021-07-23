@@ -13,7 +13,8 @@ def add_voucher(event, context):
         date_time = str(datetime.utcnow()).replace(' ','T')[0:19]+'+00:00',
         status = item['status'],
         title = item['title'],
-        description = item['description']
+        description = item.get('description', None),
+        icon_name = item.get('icon_name', None)
     )
     voucher_item.save()
     return {'status': 200}
