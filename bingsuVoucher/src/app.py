@@ -1,6 +1,7 @@
 import json
 from .bingsuVoucher import PynamoBingsuVoucher
 from datetime import datetime
+from uuid import uuid4
 
 # import requests
 
@@ -8,7 +9,7 @@ from datetime import datetime
 def add_voucher(event, context):
     item = event['arguments']
     voucher_item = PynamoBingsuVoucher(
-        voucher_id = item['voucher_id'],
+        voucher_id = str(uuid4()),
         voucher_type = item['voucher_type'],
         date_time = str(datetime.utcnow()).replace(' ','T')[0:19]+'+00:00',
         status = item['status'],
