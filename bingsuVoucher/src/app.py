@@ -45,3 +45,6 @@ def get_available_vouchers(event, context):
         return {'status': 400}
     return {'status': 200,
             'data': lst}
+
+def get_voucher_by_type(event,context):
+    return {'status': 200, 'data': 'hello world'}
