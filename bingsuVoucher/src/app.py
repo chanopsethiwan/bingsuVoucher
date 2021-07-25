@@ -1,6 +1,8 @@
 import json
 from .bingsuVoucher import PynamoBingsuVoucher
 from datetime import datetime
+import boto3
+from boto3.dynamodb.conditions import Key
 from uuid import uuid4
 
 # import requests
@@ -11,7 +13,8 @@ def add_voucher(event, context):
     voucher_item = PynamoBingsuVoucher(
         voucher_id = str(uuid4()),
         voucher_type = item['voucher_type'],
-        date_time = str(datetime.utcnow()).replace(' ','T')[0:19]+'+00:00',
+        # date_time = str(datetime.utcnow()).replace(' ','T')[0:19]+'+00:00',
+        date_time = '2021-08-31',
         status = item['status'],
         title = item['title'],
         description = item.get('description', None),
@@ -46,5 +49,28 @@ def get_available_vouchers(event, context):
     return {'status': 200,
             'data': lst}
 
-def get_voucher_by_type(event,context):
-    return {'status': 200, 'data': 'hello world'}
+def get_voucher_by_type(event, context):
+    from pandas import DataFrame
+    item = event['arguments']
+    voucher_type = item['voucher_type']
+    dynamodb = boto3.resource('dynamodb')
+    voucher_table = dynamodb.Table('BingsuVoucher')
+    response_voucher = voucher_table.query(
+            IndexName='voucher_type',
+            KeyConditionExpression=Key('voucher_type').eq(voucher_type))
+    df = DataFrame(response_voucher['Items'])
+    df = df[df['status'] == 'Available']
+    voucher_id = str(df['voucher_id'].iloc[0])
+    voucher_item = PynamoBingsuVoucher(
+        voucher_id = str(df['voucher_id'].iloc[0]),
+        date_time = str(df['datetime'].iloc[0]),
+        description = str(df['description'].iloc[0]),
+        status = 'Unavailable',
+        title = str(df['title'].iloc[0]),
+        voucher_type = voucher_type,
+        description = item.get('description', None),
+        icon_name = str(df['icon_name'].iloc[0])
+    )
+    voucher_item.save()
+
+    return {'status': 200, 'voucher_id': voucher_id}

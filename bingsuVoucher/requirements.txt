@@ -1,3 +1,5 @@
 requests
 pynamodb
 datetime
+boto3
+pandas
