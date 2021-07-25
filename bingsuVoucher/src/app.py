@@ -63,12 +63,11 @@ def get_voucher_by_type(event, context):
     voucher_id = str(df['voucher_id'].iloc[0])
     voucher_item = PynamoBingsuVoucher(
         voucher_id = str(df['voucher_id'].iloc[0]),
-        date_time = str(df['datetime'].iloc[0]),
+        date_time = str(df['date_time'].iloc[0]),
         description = str(df['description'].iloc[0]),
         status = 'Unavailable',
         title = str(df['title'].iloc[0]),
         voucher_type = voucher_type,
-        description = item.get('description', None),
         icon_name = str(df['icon_name'].iloc[0])
     )
     voucher_item.save()

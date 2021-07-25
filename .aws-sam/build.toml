@@ -6,6 +6,6 @@ codeuri = "C:\\Users\\Chulabutrach\\Documents\\Coding\\Projects\\bingsu\\bingsuV
 runtime = "python3.8"
 source_md5 = ""
 packagetype = "Zip"
-functions = ["AddVoucherFunction", "GetVoucherByIdFunction", "GetAvailableVouchersFunction"]
+functions = ["AddVoucherFunction", "GetVoucherByIdFunction", "GetAvailableVouchersFunction", "GetVoucherByType"]
 
 [layer_build_definitions]
