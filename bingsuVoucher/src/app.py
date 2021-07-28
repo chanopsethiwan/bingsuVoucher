@@ -74,7 +74,7 @@ def get_voucher_by_type(event, context):
         icon_name = str(df['icon_name'].iloc[0]),
         voucher_conditions = str(df['voucher_conditions'].iloc[0]),
         voucher_detail = str(df['voucher_detail'].iloc[0]),
-        coin_needed = str(df['coin_needed'].iloc[0])
+        coin_needed = int(df['coin_needed'].iloc[0])
     )
     voucher_item.save()
 
