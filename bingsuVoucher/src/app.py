@@ -18,7 +18,10 @@ def add_voucher(event, context):
         status = item['status'],
         title = item['title'],
         description = item.get('description', None),
-        icon_name = item.get('icon_name', None)
+        icon_name = item.get('icon_name', None),
+        voucher_conditions = item.get('voucher_conditions', None),
+        voucher_detail = item.get('voucher_detail', None),
+        coin_needed = item.get('coin_needed', None)
     )
     voucher_item.save()
     return {'status': 200}
@@ -70,7 +73,10 @@ def get_voucher_by_type(event, context):
         status = 'Unavailable',
         title = str(df['title'].iloc[0]),
         voucher_type = voucher_type,
-        icon_name = str(df['icon_name'].iloc[0])
+        icon_name = str(df['icon_name'].iloc[0]),
+        voucher_conditions = str(df['voucher_conditions'].iloc[0]),
+        voucher_detail = str(df['voucher_detail'].iloc[0]),
+        coin_needed = str(df['coin_needed'].iloc[0])
     )
     voucher_item.save()
 
