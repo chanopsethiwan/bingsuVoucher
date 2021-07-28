@@ -20,7 +20,7 @@ def add_voucher(event, context):
         description = item.get('description', None),
         icon_name = item.get('icon_name', None),
         voucher_conditions = item.get('voucher_conditions', None),
-        voucher_details = item.get('voucher_details', None),
+        voucher_detail = item.get('voucher_detail', None),
         coin_needed = item.get('coin_needed', None)
     )
     voucher_item.save()
@@ -73,7 +73,7 @@ def get_voucher_by_type(event, context):
         voucher_type = voucher_type,
         icon_name = str(df['icon_name'].iloc[0]),
         voucher_conditions = str(df['voucher_conditions'].iloc[0]),
-        voucher_details = str(df['voucher_details'].iloc[0]),
+        voucher_detail = str(df['voucher_detail'].iloc[0]),
         coin_needed = str(df['coin_needed'].iloc[0])
     )
     voucher_item.save()
