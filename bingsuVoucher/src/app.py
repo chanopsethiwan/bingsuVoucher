@@ -60,6 +60,8 @@ def get_voucher_by_type(event, context):
             KeyConditionExpression=Key('voucher_type').eq(voucher_type))
     df = DataFrame(response_voucher['Items'])
     df = df[df['status'] == 'Available']
+    if len(df) == 0:
+        return {'status': 400, 'voucher_id': "No available voucher"}
     voucher_id = str(df['voucher_id'].iloc[0])
     voucher_item = PynamoBingsuVoucher(
         voucher_id = str(df['voucher_id'].iloc[0]),
