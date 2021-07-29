@@ -56,6 +56,7 @@ def get_available_vouchers(event, context):
 
 # todo: deduct coins from user table, get('', None)
 # input: voucher_type, user_id
+# author: paopao
 def get_voucher_by_type(event, context):
     from pandas import DataFrame
     item = event['arguments']
