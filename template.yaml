@@ -67,6 +67,20 @@ Resources:
           Projection: 
             ProjectionType: ALL
       TableName: "BingsuVoucher"
+      
+  VoucherS3Bucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: "BingsuVoucherBucket"
+      AccelerateConfiguration:
+        AccelerationStatus: Enabled
+      AccessControl: PublicRead
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: false
 
 Outputs:
   AddVoucherFunction:
