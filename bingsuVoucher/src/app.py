@@ -104,6 +104,7 @@ def get_voucher_by_type(event, context):
             return {'status': 400, 'voucher_id': "Failed to update user table no coins have been deducted"}
 
         # set voucher as Unavailable
+        test_output = df.iloc[0].to_dict()
         voucher_id = str(df['voucher_id'].iloc[0])
         voucher_item = PynamoBingsuVoucher(
             voucher_id = str(df['voucher_id'].iloc[0]),
@@ -119,4 +120,4 @@ def get_voucher_by_type(event, context):
         )
         voucher_item.save()
 
-        return {'status': 200, 'voucher_id': voucher_id}
+        return {'status': 200, 'voucher_id': voucher_id, 'test': test_output}
