@@ -104,20 +104,20 @@ def get_voucher_by_type(event, context):
             return {'status': 400, 'voucher_id': "Failed to update user table no coins have been deducted"}
 
         # set voucher as Unavailable
-        test_output = df.iloc[0].to_dict()
-        voucher_id = str(df['voucher_id'].iloc[0])
+        use_voucher = df.iloc[0].to_dict()
+        voucher_id = use_voucher.get('voucher_id', None)
         voucher_item = PynamoBingsuVoucher(
-            voucher_id = str(df['voucher_id'].iloc[0]),
-            date_time = str(df['date_time'].iloc[0]),
-            description = str(df['description'].iloc[0]),
+            voucher_id = voucher_id,
+            date_time = use_voucher.get('date_time', None),
+            description = use_voucher.get('description', None),
             status = 'Unavailable',
-            title = str(df['title'].iloc[0]),
+            title = use_voucher.get('title', None),
             voucher_type = voucher_type,
-            icon_name = str(df['icon_name'].iloc[0]),
-            voucher_conditions = str(df['voucher_conditions'].iloc[0]),
-            voucher_detail = str(df['voucher_detail'].iloc[0]),
-            coin_needed = int(df['coin_needed'].iloc[0])
+            icon_name = use_voucher.get('icon_name', None),
+            voucher_conditions = use_voucher.get('voucher_conditions', None),
+            voucher_detail = use_voucher.get('voucher_detail', None),
+            coin_needed = int(use_voucher.get('coin_needed', None))
         )
         voucher_item.save()
 
-        return {'status': 200, 'voucher_id': voucher_id, 'test': test_output}
+        return {'status': 200, 'voucher_id': voucher_id}
