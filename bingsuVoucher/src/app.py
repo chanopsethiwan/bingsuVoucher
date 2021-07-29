@@ -7,7 +7,7 @@ from uuid import uuid4
 
 # import requests
 
-
+# input: voucher_type, title 
 def add_voucher(event, context):
     item = event['arguments']
     voucher_item = PynamoBingsuVoucher(
@@ -15,7 +15,7 @@ def add_voucher(event, context):
         voucher_type = item['voucher_type'],
         # date_time = str(datetime.utcnow()).replace(' ','T')[0:19]+'+00:00',
         date_time = '2021-08-31',
-        status = item['status'],
+        status = 'Available',
         title = item['title'],
         description = item.get('description', None),
         icon_name = item.get('icon_name', None),
@@ -26,6 +26,7 @@ def add_voucher(event, context):
     voucher_item.save()
     return {'status': 200}
 
+# input: get voucher by id
 def get_voucher_by_id(event,context):
     item = event['arguments']
     voucher_id = item['voucher_id']
@@ -40,6 +41,7 @@ def get_voucher_by_id(event,context):
     return {'status': 200,
             'data': lst}
 
+# input: no input
 def get_available_vouchers(event, context):
     iterator = PynamoBingsuVoucher.status_index.query("Available")
     voucher_list = list(iterator)
@@ -52,6 +54,8 @@ def get_available_vouchers(event, context):
     return {'status': 200,
             'data': lst}
 
+# todo: deduct coins from user table, get('', None)
+# input: voucher_type, user_id
 def get_voucher_by_type(event, context):
     from pandas import DataFrame
     item = event['arguments']
@@ -76,7 +80,7 @@ def get_voucher_by_type(event, context):
         icon_name = str(df['icon_name'].iloc[0]),
         voucher_conditions = str(df['voucher_conditions'].iloc[0]),
         voucher_detail = str(df['voucher_detail'].iloc[0]),
-        coin_needed = str(df['coin_needed'].iloc[0])
+        coin_needed = int(df['coin_needed'].iloc[0])
     )
     voucher_item.save()
 
