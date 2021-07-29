@@ -91,7 +91,7 @@ def get_voucher_by_type(event, context):
         client_lambda = boto3.client('lambda')
         arguments = {
             "user_id": user_id,
-            "coins": new_coins,
+            "coins": int(new_coins),
         }
 
         update_user_response = client_lambda.invoke(
